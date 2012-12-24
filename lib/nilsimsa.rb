@@ -1,3 +1,4 @@
+# coding: utf-8
 # Nilsimsa hash (build 20050414)
 # Ruby port (C) 2005 Martin Pirker
 # released under GNU GPL V2 license
@@ -5,6 +6,9 @@
 # inspired by Digest::Nilsimsa-0.06 from Perl CPAN and
 # the original C nilsimsa-0.2.4 implementation by cmeclax
 # http://ixazon.dynip.com/~cmeclax/nilsimsa.html
+
+require "nilsimsa/version"
+
 class Nilsimsa
 
   TRAN =
@@ -24,6 +28,7 @@ class Nilsimsa
   "\x0C\xFA\x87\xE9\x7C\x5B\xB1\x4D\xE5\xD4\xCB\x10\xA2\x17\x89\xBC" <<
   "\xDB\xB0\xE2\x97\x88\x52\xF7\x48\xD3\x61\x2C\x3A\x2B\xD1\x8C\xFB" <<
   "\xF1\xCD\xE4\x6A\xE7\xA9\xFD\xC4\x37\xC8\xD2\xF6\xDF\x58\x72\x4E"
+  TRAN.force_encoding(Encoding::BINARY) if TRAN.respond_to?(:force_encoding)
 
   POPC =
   "\x00\x01\x01\x02\x01\x02\x02\x03\x01\x02\x02\x03\x02\x03\x03\x04" <<
@@ -42,6 +47,8 @@ class Nilsimsa
   "\x03\x04\x04\x05\x04\x05\x05\x06\x04\x05\x05\x06\x05\x06\x06\x07" <<
   "\x03\x04\x04\x05\x04\x05\x05\x06\x04\x05\x05\x06\x05\x06\x06\x07" <<
   "\x04\x05\x05\x06\x05\x06\x06\x07\x05\x06\x06\x07\x06\x07\x07\x08"
+
+  POPC.force_encoding(Encoding::BINARY) if POPC.respond_to?(:force_encoding)
 
   def initialize(*data)
     @threshold=0;
@@ -141,10 +148,14 @@ class Nilsimsa
   end
 end
 
-begin                               # load C core - if available
-  #require "#{File.join(File.dirname(__FILE__), '..', 'ext', 'nilsimsa_native')}"
-rescue LoadError => e
-  # ignore lack of native module
+begin
+  require "nilsimsa/nilsimsa_native"  # Compiled by RubyGems.
+rescue LoadError
+  begin
+    require "nilsimsa_native"     # Compiled by the build script.
+  rescue LoadError
+    $stderr.puts "WARNING: Couldn't find the fast C implementation of nilsimsa. Using the much slower Ruby version instead."
+  end
 end
 
 

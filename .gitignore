@@ -1,8 +1,9 @@
 .bundle
+.rvmrc
 Gemfile.lock
 *.gem
-ext/Makefile
-ext/*.o
-ext/*.bundle
-ext/*.log
+ext/nilsimsa/Makefile
+ext/nilsimsa/*.o
+ext/nilsimsa/*.bundle
+ext/nilsimsa/*.log
 spec/reports

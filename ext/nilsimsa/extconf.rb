@@ -8,4 +8,4 @@ CONFIG["CCDLFLAGS"] = " -fPIC"
         
 have_header('ruby.h') or missing('ruby.h')
 
-create_makefile( 'nilsimsa_native' )
+create_makefile( 'nilsimsa/nilsimsa_native' )
