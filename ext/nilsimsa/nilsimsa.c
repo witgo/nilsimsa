@@ -262,10 +262,11 @@ rbns_init(int argc, VALUE *argv, VALUE self) {
 VALUE
 rbns_update(VALUE self, VALUE data) {
   struct nsrecord *r;
-  char *chdata;
-  long chdata_len;
-  r = get_nsr( self );
+//  char *chdata;
+//  long chdata_len;
+
   VALUE str;
+  r = get_nsr( self );
 
   Check_Type( data, T_STRING );
 
@@ -277,9 +278,9 @@ rbns_update(VALUE self, VALUE data) {
 
 VALUE
 rbns_nilsimsa(VALUE self, VALUE other) {
-  long len;
-  char *d1;
-  char *d2;
+//  long len;
+//  char *d1;
+//  char *d2;
 
   VALUE str1;
   VALUE str2;
