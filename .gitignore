@@ -5,5 +5,7 @@ Gemfile.lock
 ext/nilsimsa/Makefile
 ext/nilsimsa/*.o
 ext/nilsimsa/*.bundle
+ext/nilsimsa/*.so
 ext/nilsimsa/*.log
 spec/reports
+.idea

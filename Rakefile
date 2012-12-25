@@ -8,7 +8,7 @@ desc 'Default: run specs'
 task :default => :spec
 
 task :cleanbuild do
-  `rm ext/nilsimsa/*.o ext/nilsimsa/Makefile`
+  `cd ext/nilsimsa && ruby extconf.rb && make clean && rm Makefile`
   if RUBY_VERSION =~ /^1.9/
     `cd ext/nilsimsa && ruby extconf.rb && make`
   elsif RUBY_VERSION =~ /^1.8/
